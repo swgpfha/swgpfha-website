@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Foundation Brand Colors - From Logo */
+    --foundation-blue: 217 100% 45%;
+    --foundation-purple: 290 65% 45%;
+    --foundation-green: 140 65% 45%;
+    --foundation-yellow: 45 100% 60%;
+    --foundation-cream: 35 30% 85%;
+    
+    /* Primary Theme */
+    --primary: 217 100% 45%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 217 100% 55%;
+    --primary-dark: 217 100% 35%;
+    
+    /* Secondary Colors */
+    --secondary: 140 65% 45%;
+    --secondary-foreground: 0 0% 100%;
+    --accent: 290 65% 45%;
+    --accent-foreground: 0 0% 100%;
+    --accent-yellow: 45 100% 60%;
+    
+    /* Neutral Palette */
+    --background: 0 0% 100%;
+    --foreground: 217 32% 17%;
+    --muted: 217 10% 95%;
+    --muted-foreground: 217 10% 45%;
+    
+    /* Components */
+    --card: 0 0% 100%;
+    --card-foreground: 217 32% 17%;
+    --border: 217 20% 84%;
+    --input: 217 20% 84%;
+    --ring: 217 100% 45%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 217 32% 17%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Design System */
+    --radius: 0.75rem;
+    
+    /* Gradients */
+    --gradient-foundation: linear-gradient(135deg, hsl(var(--foundation-blue)), hsl(var(--foundation-purple)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-accent: linear-gradient(90deg, hsl(var(--accent)), hsl(var(--accent-yellow)));
+    
+    /* Shadows */
+    --shadow-foundation: 0 10px 40px -15px hsl(var(--primary) / 0.3);
+    --shadow-card: 0 4px 20px -8px hsl(var(--primary) / 0.15);
+    
+    /* Typography */
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .page-container { @apply max-w-screen-2xl mx-auto px-4 md:px-6 lg:px-8; }
+  .dark {
+    --background: 217 32% 8%;
+    --foreground: 0 0% 95%;
+    --card: 217 32% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 217 32% 10%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 217 100% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 140 65% 55%;
+    --secondary-foreground: 0 0% 100%;
+    --accent: 290 65% 55%;
+    --accent-foreground: 0 0% 100%;
+    --muted: 217 32% 15%;
+    --muted-foreground: 217 10% 65%;
+    --border: 217 32% 20%;
+    --input: 217 32% 20%;
+    --ring: 217 100% 55%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-family);
+    
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .hero-gradient {
+    background: var(--gradient-foundation);
+  }
+  
+  .foundation-shadow {
+    box-shadow: var(--shadow-foundation);
+  }
+  
+  .card-shadow {
+    box-shadow: var(--shadow-card);
+  }
+  
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+  
+  .container-padding {
+    @apply px-4 md:px-6 lg:px-8;
+  }
+}

@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum MediaType {
+  photo
+  video
+}
+
+model MediaItem {
+  id          String       @id @default(cuid())
+  title       String
+  description String?
+  location    String?
+  eventDate   DateTime?
+  type        MediaType
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  assets      MediaAsset[]
+
+  coverUrl    String?
+  thumbUrl    String?
+}
+
+model MediaAsset {
+  id          String    @id @default(cuid())
+  itemId      String
+  url         String
+  thumbUrl    String?
+  provider    String
+  publicId    String?
+  width       Int?
+  height      Int?
+  durationSec Float?
+  format      String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  item        MediaItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@index([itemId])
+}
+
+enum OpportunityTimeType {
+  FullTime
+  PartTime
+  Flexible
+  Remote
+}
+
+enum OpportunityStatus {
+  Active
+  Closed
+}
+
+model Opportunity {
+  id          String               @id @default(cuid())
+  title       String
+  timeType    OpportunityTimeType  @default(PartTime)
+  location    String?
+  description String
+  // Postgres: native text[]
+  skills      String[]
+  status      OpportunityStatus    @default(Active)
+
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+
+  @@index([status, createdAt])
+}
+
+enum ContactMessageStatus {
+  NEW
+  READ
+  REPLIED
+  ARCHIVED
+}
+
+model ContactMessage {
+  id          String                @id @default(cuid())
+  publicId    String                @unique @db.VarChar(32)
+  firstName   String
+  lastName    String
+  email       String
+  phone       String?
+  inquiryType String                // e.g. "general-information", "donation-questions"
+  subject     String
+  message     String
+  status      ContactMessageStatus  @default(NEW)
+
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+
+  @@index([createdAt, status])
+}
