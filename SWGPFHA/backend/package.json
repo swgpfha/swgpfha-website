@@ -13,7 +13,7 @@
     "prod:db:migrate": "npx prisma migrate deploy --schema=prisma/prod.schema.prisma",
     "dev": "cross-env NODE_ENV=development dotenv -e .env.development -- tsx watch src/index.ts",
     "start": "cross-env NODE_ENV=production dotenv -e .env.production -- tsx src/index.ts",
-    "postinstall": "npx prisma generate --schema=prisma/dev.schema.prisma"
+    "postinstall": "if [ \"$VERCEL\" != \"1\" ]; then cross-env PRISMA_SCHEMA_PATH=prisma/dev.schema.prisma npx prisma generate; fi"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
